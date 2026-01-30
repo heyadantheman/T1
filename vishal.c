@@ -14,8 +14,8 @@
 #include <stdint.h>
 #include <sys/mman.h>           // for madvise if needed
 
-#define MIN_PAYLOAD     1200
-#define MAX_PAYLOAD     1500
+#define MIN_PAYLOAD     800
+#define MAX_PAYLOAD     1200
 #define BATCH_SIZE      32
 #define DEFAULT_PPS     8000          // try to send ~8000 packets/sec per thread (adjust)
 #define IP_HDR_LEN      sizeof(struct iphdr)
